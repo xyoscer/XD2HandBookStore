@@ -1,0 +1,130 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS';
+    /* background: url('https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-book.jpg?raw=true') no-repeat fixed; */
+    background-size: cover;
+    background-position: 50%;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+h1 {
+    margin: 80px 0 0 30px;
+
+}
+
+h5 {
+    margin: 50px 0 0 10px;
+}
+section {
+	width: 50%;
+	margin:15% auto;
+	
+
+}
+aside {
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
+	height: 400px;
+	color:#fff;
+	background:linear-gradient(
+      rgba(80, 227, 194, 0.50),
+      rgba(80, 227, 194, 0.50)
+    ),
+    /* bottom, image */
+   /*  url(https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-1424115087662-5845efc6b366.jpg?raw=true) no-repeat; */
+    background-size: cover;
+
+}
+form {
+	width: 70%;
+	margin-left: -6px;
+    display: inline-block;
+    background-color: #fff;
+    height: 400px;
+    box-shadow:  0 0 1px #ddd;
+}
+input{
+	border:none;
+	margin:0 auto;
+  
+}
+nav ul {
+    list-style: none;
+    margin: 15px 0 0 30%;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav li a {
+    text-decoration: none;
+}
+
+nav ul .active {
+    color: #50E3C2;
+}
+.form-group {
+   margin: 5px 0 0 20%;
+
+}
+.form-control{
+  display: inline-block;
+  width: 80%; 
+  padding: 15px 10px;
+  font-size: 14px;  
+  color: #555; 
+  border-bottom: 1px solid #ccc; 
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+#WriteCode {
+	width: 40%; 
+	padding: 15px 10px 0 10px;
+}
+#code {
+	display: inline-block;	
+	border: 1px solid #ccc;
+	height:40px;
+	width: 35%;
+  margin-bottom: -10px;
+}
+.form-control:focus {
+  border-color: #fff;
+   outline: 0; 
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px #fff, 0 0 8px  #50e3c2;
+}
+.btn {
+    display: inline-block;
+     width: 20%;
+     margin-left: 35%;  
+     background:  #fff;
+     border: 1px solid #5CE6CD;
+    border-radius: 20px;
+    color: #9B9B9B;
+    text-transform: uppercase;
+    padding: 6px 10px;   
+    line-height: 1.4;
+    text-align: center;   
+    cursor: pointer;   
+    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    
+   
+}
+.btn:focus {
+  color: #333;
+  background-color: #30e3c2;
+  outline: 0;
+  text-decoration: none;
+}
+.label {
+	margin-left: 10%;
+}
+.tips{
+    color: #a8a8a8;
+    font-size: .5em;  
+    
+}

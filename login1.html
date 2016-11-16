@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页面</title>
+	<link rel="stylesheet" href="css/login1.css">
+</head>
+<body>
+	<section>
+		<aside>
+			
+             <h1>Welcome</h1>
+             <h5>Second Hand BookStore</h5>
+                     
+		</aside>
+		<form action="index.html" method="post">
+             <nav>
+             <ul>
+                <li><a href="login.html" class="active">Login</a></li> /
+                 <li><a href="singup.html">Sign up</a></li>
+              </ul>
+         </nav>
+			<div class="form-group">			
+			<input type="text" class="form-control"  id="name" placeholder="Account Name">
+			 <p class="tips"></p>
+		</div>
+		    
+		<div class="form-group">		
+			<input type="password" class="form-control" id="pwd"placeholder="Password">
+			 <p class="tips"></p>
+		</div>		
+		
+		<div class="form-group">			
+			<input type="text" id="WriteCode" class="form-control" placeholder="验证码">
+            <div id="code"><canvas id="canvas" width="150" height="40"></canvas></div>            
+			 <p class="tips"></p>
+			
+		</div>
+		<div class="form-group">
+			<label for="" class="label">
+              <input type="checkbox" id="remeber"/> Remember Me</label>         
+			 <p></p>
+			
+		</div>
+		<button  type="submit" class="btn" id="valite">login</button>
+	 </form> 
+		
+	</section>
+    <script src="js/loginCode.js"></script> 
+    <script src="js/login.js"></script>
+
+</body>
+</html>
