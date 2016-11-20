@@ -27,7 +27,7 @@
       data.name = name.value.trim();
       data.pwd = pwd.value.trim();
       var jsonobj = JSON.stringify(data);
-    CookieUtil.set(data.name,jsonobj);
+    CookieUtil.set(data.name,jsonobj,365);
   }
   //验证名字
   var validateName = function(event) { 
