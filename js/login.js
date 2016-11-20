@@ -80,7 +80,7 @@ var  validatePwd = function(event) {
       var jsonobj=JSON.stringify(data);
       var cb = ajaxResultdeal; //ajax的回调函数
       //传递给检查用户名与密码是否一致的url页面
-      url='test.php?data='+jsonobj+"&r="+Math.random();
+      url='http://127.0.0.1/XD2HandBookStore/test.php?data='+jsonobj+"&r="+Math.random();
         toAjax(url,cb);
    }
 
@@ -134,6 +134,10 @@ var  validatePwd = function(event) {
            codeResult = false;
       }
    }
+   Code.onclick = function() {
+     this.parentNode.lastElementChild.innerHTML = "";
+     
+   }
   //提交按钮事件
  login.onclick = function() {
     if(result&&codeResult) {
@@ -141,11 +145,11 @@ var  validatePwd = function(event) {
     }
     else {
       alert("ajax验证失败");
+      return false;
     }
-  return false;
+  
  }  
-var CookieUtil={
-    
+var CookieUtil={    
     set:function(name,value,expires,path,domain,secure){
       var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
       if(expires instanceof Date){
