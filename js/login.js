@@ -11,7 +11,7 @@
   var Code =document.getElementById('WriteCode');
   var login = document.getElementById('valite');
   var tips=document.getElementsByClassName('tips');
-  var remeber = document.getElementById("remeber");
+ 
   var result=false;//用来标志ajax返回结果是否正确
   
   name.onblur = function() {
@@ -22,13 +22,7 @@
      validatePwd(event);
        return false;
   }
-  remeber.onclick  = function() {
-    var data = {};
-      data.name = name.value.trim();
-      data.pwd = pwd.value.trim();
-      var jsonobj = JSON.stringify(data);
-    CookieUtil.set(data.name,jsonobj,365);
-  }
+
   //验证名字
   var validateName = function(event) { 
    var nameValue = name.value.trim();   
@@ -75,27 +69,27 @@ var  validatePwd = function(event) {
    var AjaxtoData = function() { 
       var nameValue = name.value.trim();
       var pwdValue = pwd.value.trim();     
-      var data={username:nameValue,userpwd:pwdValue};
-      //将对象转换为JSON串，通过ajax进行传递
-      var jsonobj=JSON.stringify(data);
+     var data="username="+nameValue+"&userpwd="+pwdValue;
       var cb = ajaxResultdeal; //ajax的回调函数
       //传递给检查用户名与密码是否一致的url页面
-      url='http://127.0.0.1/XD2HandBookStore/test.php?data='+jsonobj+"&r="+Math.random();
-        toAjax(url,cb);
+      url='http://127.0.0.1/XD2HandBookStore/test.php';
+        toAjax(url,data,cb);
    }
 
   //跨浏览器创建xmlhttp对象
   function createXMLHttpRequest(){
+    var xmlobj;
       if(window.ActiveXObject){
         xmlobj=new ActiveXObject("Microsoft.XMLHTTP");
       }
       else if(window.XMLHttpRequest){
         xmlobj=new XMLHttpRequest();
       }
+      return xmlobj;
  } 
 
-  function toAjax(url,callback){
-         createXMLHttpRequest();       
+  function toAjax(url,data,callback){
+        var xmlobj =  createXMLHttpRequest();       
          xmlobj.onreadystatechange=function(){
         if(xmlobj.readyState==4&&xmlobj.status==200){
            callback(xmlobj.responseText);                   
@@ -104,10 +98,10 @@ var  validatePwd = function(event) {
           result = false;
         }
       }    
-      xmlobj.open("GET",url,true);
-      /*xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
-      xmlobj.send(data);*/
-      xmlobj.send(null);
+      xmlobj.open("POST",url,true);
+      xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+      xmlobj.send(data);
+      
     }
     //ajax后台返回数据，在页面进行响应显示
   function ajaxResultdeal(response){  
@@ -149,40 +143,7 @@ var  validatePwd = function(event) {
     }
   
  }  
-var CookieUtil={    
-    set:function(name,value,expires,path,domain,secure){
-      var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
-      if(expires instanceof Date){
-        cookieText+="; expires="+expires.toGMTString();
-      }
-      if(path){
-        cookieText+="; path"+path;
-      }
-      if(domain){
-        cookieText+="; domain="+domain;
-      }
-      if(secure){
-        cookieText+="; secure";
-      }
-      document.cookie=cookieText;
-    },
-    unset:function(name,path,domain,secure){
-      this.set(name,"",new Date(0),path,domian,secure);
-    },
-    get:function(name){
-      var cookieName=encodeURIComponent(name)+"=";
-      var cookieStart=document.cookie.indexOf(cookieName);
-      var cookieValue=null;
-      if(cookieStart>-1){
-        var cookieEnd=document.cookie.indexOf(";",cookieStart);
-        if(cookieEnd==-1){
-            cookieEnd=document.cookie.length;       
-           }
-   cookieValue=decodeURIComponent(document.cookie.substring(cookieStart+cookieName.length,cookieEnd));
-      }
-      return cookieValue;
-    }, 
-  } ;  
+ 
 
  
 })();

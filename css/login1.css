@@ -2,7 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Trebuchet MS';
-    /* background: url('https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-book.jpg?raw=true') no-repeat fixed; */
+   background: url('https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-book.jpg?raw=true') no-repeat fixed;  
     background-size: cover;
     background-position: 50%;
   -webkit-font-smoothing: antialiased;
@@ -17,32 +17,31 @@ h5 {
     margin: 50px 0 0 10px;
 }
 section {
-	width: 50%;
+	max-width: 800px;
 	margin:15% auto;
+  display: flex;
+  align-content:flex-start;
 	
 
 }
 aside {
-	width: 30%;
-	display: inline-block;
-	vertical-align: top;
-	height: 400px;
+	width: 200px;
+	display: block;
+	height: 300px;
 	color:#fff;
 	background:linear-gradient(
       rgba(80, 227, 194, 0.50),
       rgba(80, 227, 194, 0.50)
     ),
     /* bottom, image */
-   /*  url(https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-1424115087662-5845efc6b366.jpg?raw=true) no-repeat; */
+    url(https://github.com/XDCreater/XD2HandBookStore/blob/master/images/photo-1424115087662-5845efc6b366.jpg?raw=true) no-repeat; 
     background-size: cover;
 
 }
 form {
-	width: 70%;
-	margin-left: -6px;
-    display: inline-block;
+    width: 500px;
     background-color: #fff;
-    height: 400px;
+    height: 300px;
     box-shadow:  0 0 1px #ddd;
 }
 input{
@@ -98,7 +97,7 @@ nav ul .active {
 }
 .btn {
     display: inline-block;
-     width: 20%;
+
      margin-left: 35%;  
      background:  #fff;
      border: 1px solid #5CE6CD;
@@ -120,9 +119,7 @@ nav ul .active {
   outline: 0;
   text-decoration: none;
 }
-.label {
-	margin-left: 10%;
-}
+
 .tips{
     color: #a8a8a8;
     font-size: .5em;  
