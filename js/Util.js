@@ -29,6 +29,14 @@ var EventUtil = {
 	//获取事件来自哪个元素
     getElement:function(event){
 	return event.target||event.srcElement;
-},
+    },
+    //阻止默认行为
+   preventDefault:function(event){
+    if(event.preventDefault){
+    	event.preventDefault();
+    }else{
+    	event.returnValue=false;
+    }
+}, 
 
 }

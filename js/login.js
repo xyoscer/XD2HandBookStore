@@ -32,7 +32,7 @@
              wrongStyle(event); 
              return false;          
         }
-         else if(getLength>= 4 && getLength <= 16){
+         else if(getLength>= 2 && getLength <= 11){
           rightStyle(event);                          
              return false;
         }  
@@ -72,7 +72,7 @@ var  validatePwd = function(event) {
      var data="username="+nameValue+"&userpwd="+pwdValue;
       var cb = ajaxResultdeal; //ajax的回调函数
       //传递给检查用户名与密码是否一致的url页面
-      url='http://127.0.0.1/XD2HandBookStore/test.php';
+      url='http://luoyu.site:8088/userManage/login';
         toAjax(url,data,cb);
    }
 
@@ -104,8 +104,10 @@ var  validatePwd = function(event) {
       
     }
     //ajax后台返回数据，在页面进行响应显示
-  function ajaxResultdeal(response){  
-       if(response == "1") {
+  function ajaxResultdeal(response){ 
+   var data = JSON.parse(response);     
+       if(data['status'] == "true") {
+            var imgsrc = data['img'];
              result=true;
         }else {
           tips[1].innerHTML="你输入账号与密码不否";
