@@ -1,11 +1,9 @@
 (function(){
     var signBtn = document.getElementById('sign');
-    var flag = false;
-    var flag1 = false;
-    var result = false;
-    var userData = {};
-	 function regValue(array){
-                
+    var flag = false;//用于验证表单的标志   
+    var ajaxResult = false;
+   //验证输入表单的密码，tel,email格式是否正确
+	 function regValue(array){                
                 var input=document.getElementById(array[0]+"_"+array[1]);               
                 var value=input.value.trim();
                 var focusMsg = ["必填，字符数应为2~11位","必填，密码字符数应为6~11位",
@@ -17,28 +15,7 @@
                         targetObj.nextElementSibling.innerHTML = focusMsg[parseInt(array[1])];
                    };
                
-                switch (parseInt(array[1])){
-                    case 0:                         
-                         var getLength = value.length;
-                         if(getLength>=2&&getLength<=11){
-                         	  //与数据库Ajax通信，确保注册用户名在数据库中不存在
-                              var data="username="+value;
-                              var cb = ajaxResultdeal; //ajax的回调函数
-                              //传递给检查用户名是否存在的url页面
-                              url='http://luoyu.site:8088/userManage/login';
-                               toAjax(url,data,cb);
-                               if(result){
-                               	flag = true;
-                               }else { //说明用户名已经存在
-                                 flag1 = true;
-                               }
-                             // flag = true;
-                         	  
-                         }else{
-                         	flag = false;
-                         }                     
-                      
-                        break;
+                switch (parseInt(array[1])){                 
                     case 1:  
                         flag=/^\S{6,11}$/.test(value);
                         break;
@@ -52,51 +29,64 @@
                 }
                     if(flag) {
                         input.style.borderBottom = "1px solid lightgreen";
-                        var str = array[0];
-                        //将正确的表单数据存入对象中                       
-                        userData[str] = value;      
-                       }else if(flag1) {
-                        var tip = document.getElementById(array[0]+"_"+array[1]);
-                        tip.nextElementSibling.style.color = 'red';
-                        tip.style.borderBottom = '1px solid red';
-                        tip.nextElementSibling.innerHTML = "用户名已经存在";
-                    }else {
+                            
+                       }else {
                        wrongStyle(array);
                         
                     }
             }
+        /*
+         *表单输入框获得焦点时，之前的错误提醒样式统一去除
+         */
+
       var focusStyle = function(array) {                	
-             var targetObj = document.getElementById(array[0]+"_"+array[1]);                 
+             var targetObj = document.getElementById(array[0]+"_"+array[1]);
+                 targetObj.style.borderBottom = "";                 
                  targetObj.nextElementSibling.innerHTML = "";
             };
-
+    //给除过用户名的的表单添加focus,blur事件
 	  var inputs=document.getElementsByTagName("input");
             [].forEach.call(inputs,function(v){
-            	var array = [];
-                var array=v.getAttribute("id").split("_");                
+              if(v!=inputs[0]){
+                var array = [];
+                var array=v.getAttribute("id").split("_"); 
                 EventUtil.addHandler(v,"blur",function(){
                    regValue(array);
                 }); 
-                EventUtil.addHandler(v,"click",function(){
+                EventUtil.addHandler(v,"focus",function(){
                    focusStyle(array);
                 }); 
+              }
+            	
              });
 
-       EventUtil.addHandler(signBtn,"click",function(e){         
-                if(flag){
-                      var jsonuserData = JSON.stringify(userData);
-                      alert(jsonuserData);
-                       alert("提交成功");
-
-                }else{
-                	 alert("提交失败");
-                	 EventUtil.preventDefault(e); 
-                    }
-                   
-                });
+    
+   
                
   
+EventUtil.addHandler(inputs[0],"blur",function(){
+   var input=document.getElementById('username_0');               
+   var value=input.value.trim();
+   var getLength = value.length;
+            if(getLength>=2&&getLength<=11){
+                  //与数据库Ajax通信，确保注册用户名在数据库中不存在
+                   var data="username="+value;
+                   var callback = ajaxResultdeal; //ajax的回调函数,处理存在不存在页面的显示问题
+                   //传递给检查用户名是否存在的url页面
+                  url='http://luoyu.site:8080/userManage/userNameExist';
+                   toAjax(url,data,callback);
+                 }else {
+                    input.nextElementSibling.style.color = 'red';
+                    input.style.borderBottom = '1px solid red';
+                    input.nextElementSibling.innerHTML = "必填，字符数应为2~11位";
+                 }
 
+ }); 
+EventUtil.addHandler(inputs[0],"focus",function(){
+    var targetObj = document.getElementById('username_0'); 
+        targetObj.style.borderBottom = "";                
+        targetObj.nextElementSibling.innerHTML = "";
+});
   //跨浏览器创建xmlhttp对象
   function createXMLHttpRequest(){
     var xmlobj;
@@ -116,7 +106,7 @@
            callback(xmlobj.responseText);                   
         }
         else {
-          result = false;
+          ajaxResult = false;
         }
       }    
       xmlobj.open("POST",url,true);
@@ -126,13 +116,31 @@
     }
     //ajax后台返回数据，在页面进行响应显示
   function ajaxResultdeal(response){ 
-       
-       if(response == "true") {
-            result = true;
-        }else {
-         
-            result = false;
-        }        
-               
-      }
+      var data = JSON.parse(response);         
+      var parsedata = data['boolResult'];       
+       if(parsedata.result) {//true表示用户名存在           
+               ajaxResult = false;  
+               alert(parsedata.result);     
+             var tip = document.getElementById('username_0');
+                tip.nextElementSibling.style.color = 'red';
+                tip.style.borderBottom = '1px solid red';
+                tip.nextElementSibling.innerHTML = "用户名已经存在";
+        }else {   
+         alert(parsedata.result);        
+            ajaxResult = true;
+           inputs[0].style.borderBottom = "1px solid lightgreen";
+            
+        }           
+    }
+//提交按钮注册点击事件
+  EventUtil.addHandler(signBtn,"click",function(e){         
+                if(flag&&ajaxResult){                                          
+                       alert("提交成功");
+
+                }else{
+                   alert("提交失败");
+                   EventUtil.preventDefault(e); 
+                }
+                   
+   });
 })();

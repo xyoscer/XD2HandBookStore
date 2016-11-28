@@ -11,7 +11,6 @@
   var Code =document.getElementById('WriteCode');
   var login = document.getElementById('valite');
   var tips=document.getElementsByClassName('tips');
- 
   var result=false;//用来标志ajax返回结果是否正确
   
   name.onblur = function() {
@@ -22,7 +21,6 @@
      validatePwd(event);
        return false;
   }
-
   //验证名字
   var validateName = function(event) { 
    var nameValue = name.value.trim();   
@@ -32,7 +30,7 @@
              wrongStyle(event); 
              return false;          
         }
-         else if(getLength>= 2 && getLength <= 11){
+         else if(getLength>= 4 && getLength <= 16){
           rightStyle(event);                          
              return false;
         }  
@@ -66,19 +64,20 @@ var  validatePwd = function(event) {
    }
 }
    //与数据库Ajax通信，确保用户名密码一致
-   var AjaxtoData = function() { 
-      var nameValue = name.value.trim();
-      var pwdValue = pwd.value.trim();     
-     var data="username="+nameValue+"&userpwd="+pwdValue;
-      var cb = ajaxResultdeal; //ajax的回调函数
-      //传递给检查用户名与密码是否一致的url页面
-      url='http://luoyu.site:8088/userManage/login';
+   var AjaxtoData = function() {        
+       var nameValue = name.value.trim();
+      var pwdValue = pwd.value.trim();    
+       var data="username="+nameValue+"&userpwd="+pwdValue;       
+      var cb = ajaxResultdeal; //ajax的回调函数,用来处理返回结果，在页面进行显示
+      //传递给检查用户名与密码是否一致的url页面,CORS实现跨域
+      var url = 'http://127.0.0.1/XD2HandBookStore/test.php';
+      /*var url='http://127.0.0.1/XD2HandBookStore/test.php?data='+jsonobj+"&r="+Math.random();*/
         toAjax(url,data,cb);
    }
 
   //跨浏览器创建xmlhttp对象
   function createXMLHttpRequest(){
-    var xmlobj;
+     var xmlobj;
       if(window.ActiveXObject){
         xmlobj=new ActiveXObject("Microsoft.XMLHTTP");
       }
@@ -89,7 +88,8 @@ var  validatePwd = function(event) {
  } 
 
   function toAjax(url,data,callback){
-        var xmlobj =  createXMLHttpRequest();       
+     
+      var xmlobj = createXMLHttpRequest();       
          xmlobj.onreadystatechange=function(){
         if(xmlobj.readyState==4&&xmlobj.status==200){
            callback(xmlobj.responseText);                   
@@ -97,16 +97,19 @@ var  validatePwd = function(event) {
         else {
           result = false;
         }
-      }    
+      }     
+    
       xmlobj.open("POST",url,true);
-      xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+      xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+     
       xmlobj.send(data);
-      
+  
     }
     //ajax后台返回数据，在页面进行响应显示
-  function ajaxResultdeal(response){ 
-   var data = JSON.parse(response);     
-       if(data['status'] == "true") {
+  function ajaxResultdeal(response){  
+       var data = JSON.parse(response);    
+       var parsedata = data['boolResult'];         
+       if(parsedata.result) {
             var imgsrc = data['img'];
              result=true;
         }else {
@@ -130,23 +133,19 @@ var  validatePwd = function(event) {
            codeResult = false;
       }
    }
-   Code.onclick = function() {
-     this.parentNode.lastElementChild.innerHTML = "";
-     
-   }
   //提交按钮事件
  login.onclick = function() {
     if(result&&codeResult) {
       alert("登录成功");
+
     }
     else {
       alert("ajax验证失败");
-      return false;
+        return false;
     }
-  
- }  
- 
 
- 
+ }  
+
 })();
 	
+ 
