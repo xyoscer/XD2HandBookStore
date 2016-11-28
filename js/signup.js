@@ -1,6 +1,6 @@
 (function(){
     var signBtn = document.getElementById('sign');
-    var flag=false;
+    var flag = false;
     var flag1 = false;
     var result = false;
     var userData = {};
@@ -20,7 +20,6 @@
                 switch (parseInt(array[1])){
                     case 0:                         
                          var getLength = value.length;
-
                          if(getLength>=2&&getLength<=11){
                          	  //与数据库Ajax通信，确保注册用户名在数据库中不存在
                               var data="username="+value;
@@ -33,7 +32,7 @@
                                }else { //说明用户名已经存在
                                  flag1 = true;
                                }
-                              flag = true;
+                             // flag = true;
                          	  
                          }else{
                          	flag = false;
@@ -55,11 +54,8 @@
                         input.style.borderBottom = "1px solid lightgreen";
                         var str = array[0];
                         //将正确的表单数据存入对象中                       
-                        userData[str] = value;                
-                       
-
-                       
-                    }else if(flag1) {
+                        userData[str] = value;      
+                       }else if(flag1) {
                         var tip = document.getElementById(array[0]+"_"+array[1]);
                         tip.nextElementSibling.style.color = 'red';
                         tip.style.borderBottom = '1px solid red';
@@ -131,7 +127,7 @@
     //ajax后台返回数据，在页面进行响应显示
   function ajaxResultdeal(response){ 
        
-       if(response == "1") {
+       if(response == "true") {
             result = true;
         }else {
          
