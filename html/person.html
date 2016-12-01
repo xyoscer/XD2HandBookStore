@@ -9,7 +9,7 @@
 </head>
 <body>
 	 <header>
-            <span>2HandBookStore</span>                
+            <span>2HandBookStore</span>            
                 <div class="login">
                     <ul class="login-option">
                         <li><a href="#">Login</a></li>
@@ -17,32 +17,27 @@
                     </ul>
                 </div>
       </header>
-      <nav class="row">
-                <ul class="col-8" id="navul">
+      <nav>
+                <ul id="navul">
                     <li><a href="#">HOME</a></li>
                     <li><a href="#">BLOG</a></li>
                     <li><a href="#">SHOP</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">CONTACT</a></li>
-              </ul>
-              <ul class="col-2" id="drop_down">
-               <li><!-- <img src="Images/profile.png" alt="人物图像" width="50px;" height="50px;"> --><a href="#"></a> </li>
-              <li id="arror"><a href="#">箭头</a>
+                    <li id="arror"><a href="#"><img src="../images/profile.png" alt="人物图像" width="50px;" height="50px;"></a>
                   <ul  class="sub_menu"> 
                   <li  class="item"><a href="#" class="alink">Signed in as Susan</a></li>
                   <li  class="item"><a href="#" class="alink">Your profile</a></li>
                   <li class="item"><a href="#" class="alink">Help</a></li>
                 <li class="item"><a href="#" class="alink">Settings</a></li>
                 <li class="item"><a href="#" class="alink">Sign out</a></li>
-         </ul>
-              </li>
+                
+         </ul></li>
+        
               
-                 
-              
-             </ul>
               
 
-
+              </ul>     
       </nav>
       <div class="row">
          <aside class="col-3">
@@ -75,27 +70,29 @@
          	 </div>
          	 <div class="row" id="personinfo">
          	 	<form action="">
-         	 		<label for="user" class="col-12">User</label>
-         	 		<input type="text" id="user" placeholder="Suan" class="col-12 form-control">
-         	 		<label for="Fname" class="col-12">First name</label>
-         	 		<input type="text" id="Fname" placeholder="Suan" class="col-12 form-control">
-         	 		<label for="Lname" class="col-12">Last name</label>
-         	 		<input type="text" id="Lname" placeholder="Suan" class="col-12 form-control">
-         	 		<label for="email" class="col-12">Emaile</label>
-         	 		<input type="email" id="email" placeholder="111@qq.com" class="col-12 form-control">
-         	 		<button class="btn"><h1>Update password</h1></button>
-         	 		<label for="pwd" class="col-12">Previous password</label>
-         	 		<input type="password" id="pwd" placeholder="" class="col-12 form-control">
-         	 		<label for="Npwd" class="col-12">New password</label>
-         	 		<input type="password" id="Npwd" placeholder="" class="col-12 form-control">
+         	 		<label for="user" class="col-12">名字</label>
+         	 		<input type="text" id="user" placeholder="Suan" class="col-12 form-control"name="userName">
+         	 		<label for="college" class="col-12">所在学院</label>
+         	 		<input type="text" id="college" placeholder="Suan" class="col-12 form-control"name="userCollege">
+         	 		<label for="tel" class="col-12">联系方式</label>
+         	 		<input type="text" id="tel" placeholder="Suan" class="col-12 form-control" name="userTel">
+         	 		<label for="email" class="col-12">Email</label>
+         	 		<input type="email" id="email" placeholder="111@qq.com" class="col-12 form-control" name="userEmail">
+              <button class="btn" type="submit">保存</button>
+         	 		<button class="btn"><h1>更新密码</h1></button>
+         	 		<label for="pwd" class="col-12">旧密码</label>
+         	 		<input type="password" id="pwd" placeholder="" class="col-12 form-control" name="userPwd">
+         	 		<label for="Npwd" class="col-12">新设密码</label>
+         	 		<input type="password" id="Npwd" placeholder="" class="col-12 form-control" name="userNpwd">
+
          	 	</form>
          	 </div>
 
          </section>
       </div>
-      	<footer>
+      	<footer class="row">
             <p>&copy; Copyright 2016 XD2HandBookStore by XDCrater.</p> 
-            </footer> 
+        </footer> 
    <script src="../js/person.js"></script>     
 </body>
 </html>
